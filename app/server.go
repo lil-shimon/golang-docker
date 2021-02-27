@@ -45,7 +45,7 @@ func show(c echo.Context) error {
 }
 
 //post api
-func post(e echo.Context) error {
+func post(c echo.Context) error {
 	u := new(User)
 	if err := c.Bind(u); err != nil {
 		return err
@@ -53,7 +53,7 @@ func post(e echo.Context) error {
 	return c.JSON(http.StatusOK, u)
 }
 
-func sendMessage(e echo.Context) error {
+func sendMessage(c echo.Context) error {
 	m := new(Message)
 	if error := c.Bind(m); error != nil {
 		return error
