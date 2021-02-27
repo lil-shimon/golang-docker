@@ -1,0 +1,4 @@
+44e461bb6506e1f454f092a809a64f303b6c8e33		branch 'bcb-to-fb' of https://github.com/googleapis/go-genproto
+ab064af717059515c07699f55ae1133bf9cc7dcc		branch 'master' of https://github.com/googleapis/go-genproto
+31cebe2ab674133b3cc1aead3ac382b75def1527		branch 'regen_genproto' of https://github.com/googleapis/go-genproto
+ca127dc89ece3ed7c8cc54da88b5b0190ea1d3e4		branch 'regen_genproto_test' of https://github.com/googleapis/go-genproto
