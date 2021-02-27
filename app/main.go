@@ -9,7 +9,7 @@ firebase "firebase.google.com/go"
 )
 
 func main() {
-	// Use a service account
+	//初期化
 	ctx := context.Background()
 	sa := option.WithCredentialsFile("path/to/serviceAccount.json")
 	app, err := firebase.NewApp(ctx, nil, sa)
@@ -21,5 +21,17 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
+	//データを追加する
+	_, _, err = client.Collection("users").Add(ctx, map[string]interface{} {
+		"first": "example.first",
+		"middle": "example.middle",
+		"last": "example.last",
+		"born": "example.born",
+	})
+	if err != nil{
+		log.Fatalf("Failed adding alovelace: %v", err)
+	}
+	//切断
 	defer client.Close()
 }
