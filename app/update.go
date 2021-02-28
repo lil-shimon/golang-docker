@@ -1,11 +1,12 @@
 package main
 
 import (
-"context"
+	"cloud.google.com/go/firestore"
+	"context"
+	"google.golang.org/api/option"
 	"log"
 
 firebase "firebase.google.com/go"
-"google.golang.org/api/option"
 )
 
 func main() {
@@ -22,15 +23,12 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	//データを追加する
-	_, err = client.Collection("users").Doc("user2").Set(ctx, map[string]interface{} {
-		"first": "example.first",
-		"middle": "example.middle",
-		"last": "example.last",
-		"born": "example.born",
-	})
-	if err != nil{
-		log.Fatalf("Failed adding alovelace: %v", err)
+	//データを更新する
+	_, updateError := client.Collection("users").Doc("user2").Set(ctx, map[string]interface{} {
+		"first": "editExample.first",
+	}, firestore.MergeAll)
+	if updateError != nil{
+		log.Fatalf("Failed editing alovelace: %s", err)
 	}
 
 	//切断
