@@ -2,9 +2,9 @@ package main
 
 import (
 "context"
-	"fmt"
-	"google.golang.org/api/iterator"
-	"log"
+"fmt"
+"google.golang.org/api/iterator"
+"log"
 
 firebase "firebase.google.com/go"
 "google.golang.org/api/option"
@@ -24,15 +24,17 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	//データを追加する
-	_, _, err = client.Collection("users").Add(ctx, map[string]interface{} {
-		"first": "example.first",
-		"middle": "example.middle",
-		"last": "example.last",
-		"born": "example.born",
-	})
-	if err != nil{
-		log.Fatalf("Failed adding alovelace: %v", err)
+	//データ読み取り
+	iter := client.Collection("users").Documents(ctx)
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			log.Fatalf("failed to iterate: %v", err)
+		}
+		fmt.Println(doc.Data())
 	}
 
 	//切断
